@@ -21,6 +21,4 @@ git commit -m "add readme file" #提交本次修改
 git push origin master	#推送到远程仓库
 ```
 
-111111
 
-22222
