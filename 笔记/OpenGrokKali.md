@@ -1,5 +1,8 @@
+# 1 ctags
+
 安装universal-ctags
 卸载exuberant-ctags
+
 ```
 sudo apt-get purge ctags
 ```
@@ -21,7 +24,6 @@ sudo make install
 ```
 安装pip3
 ```shell
-
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 sudo python3 get-pip.py
 ```
