@@ -6,12 +6,16 @@ sudo apt-get purge ctags
 下载universal-ctags源码
 ```
 git clone https://github.com/universal-ctags/ctags.git
+
+
+sudo ln -s /home/hoperun/software /usr/bin/ctags
+sudo ln -s /home/hoperun/software /usr/bin/ctags
 ```
 编译及安装
 ```
 cd ctags
 ./autogen.sh 
-./configure
+./configure --prefix=/home/hoperun/software/ctags
 make
 sudo make install
 ```
@@ -44,18 +48,20 @@ cd /opt/opengrok/tools
 cd /opt/opengrok
 sudo mkdir -p /opt/opengrok/etc         # Opengrok配置文件目录
 sudo mkdir -p /index/src                # Opengrok索引代码目录（可以指定任意目录）
-
-
 ```
 
 ```shell
 sudo cp -rf CLionProjects GOPATH /index/src
-
 ```
 
+生成索引
 
-
-
+```
+indexer.py -J=-Djava.util.logging.config.file=/opt/opengrok/logging.properties \
+    -a /opt/opengrok/lib/opengrok.jar -- \
+    -s /opt/opengrok/src -d /opt/opengrok/data -H -P -S -G \
+    -W /opt/opengrok/etc/configuration.xml -U http://localhost:8080
+```
 
 
 
