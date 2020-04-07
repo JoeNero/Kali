@@ -156,7 +156,15 @@ adb shell setprop vendor.debug.fpipe.force.printio 1
 adb shell setprop vendor.debug.tpi.s.log 1
 
 # 4 保存截图
-
+```shell
 adb shell setenforce 0
-
 adb shell setprop debug.camera.algo.asfb.dump 2
+```
+```shell
+adb shell setprop vendor.debug.camera.hdr.preview.dump 1
+adb shell mkdir /data/vendor/camera_preview
+```
+
+```
+adb shell setprop vendor.debug.camera.hdr.dump 1
+```
