@@ -1,0 +1,82 @@
+adb  reboot
+adb  root
+adb shell setenforce 0
+adb shell setprop vendor.debug.camera.hdr.log 3
+adb shell pkill camera*
+
+
+//开启美颜预览dump 输入输出图
+adb  reboot
+adb  root
+adb shell setenforce 0
+adb shell setprop debug.camera.algo.asfb.dump 2
+
+//开启美颜拍照dump 输入输出图
+adb  reboot
+adb  root
+adb shell setenforce 0
+adb shell setprop debug.camera.algo.asfb.dump 1
+
+//开MY_LOGD
+adb shell setprop persist.vendor.mtk.camera.log_level 3
+adb shell setprop vendor.debug.fpipe.force.printio 1
+adb shell setprop vendor.debug.tpi.s.log 1
+
+
+//
+开各模块log前，建议先关闭selinux权限，并确定logD是已经有打印的，如果没有打印可以用如下命令开启：
+adb root
+adb shell setenforce 0
+adb shell setprop persist.vendor.mtk.camera.log_level 3  
+adb shell pkill camera*
+ 
+再按以下方法开对应模块的 log：
+1. 开MTK Camera2 APP log
+adb root
+adb shell setprop vendor.debug.mtkcam.loglevel 4  
+ 
+ 
+2. 开camera device hal3 log
+log tag: mtkcam-dev3
+adb root
+adb shell setprop debug.camera.log.CameraDevice3 2
+ 
+ 
+3. 开 AppStreamMgr 的 log
+log tag:  mtkcam-AppStreamMgr
+adb root
+adb shell setprop vendor.debug.camera.log.AppStreamMgr 3
+PS:
+X>=1, dump per-frame callback image/meta/shutter/error message
+X>=2, dump per-frame control metadata
+X>=3, dump per-frame result metadata     
+打开后，会有关键 log:   mtkcam-AppStreamMgr: [x-CallbackHandler::performCallback]   
+
+4. 开Pipeline log 
+log tag: mtkcam-PipelineFrameBuilder
+adb root
+adb shell setprop persist.vendor.debug.camera.log 3
+adb shell pkill camera*
+ps:
+X>=2, Log every IPipelineFrame settings
+X>=3, Log every IPipelineFrame settings and its PipelineContext
+ 
+打开后，会有关键 log:   mtkcam-PipelineFrameBuilder: App image stream buffers=
+
+5. 开 P1Node log
+log tag: MtkCam/P1NodeImp
+adb root
+adb shell setprop vendor.debug.camera.log.p1node 3
+
+6. 开preview/record 时P2S的log 
+
+开 P2StreamingNode下StreamingFeaturePipe层以上(包括DispatchProcessor/StreamingProcessor)的log：
+adb root  
+adb shell setprop vendor.debug.mtkcam.p2.log 1
+
+开StreamingFeaturePipe log：
+adb root
+adb shell setprop vendor.debug.fpipe.force.printio 1
+adb shell setprop vendor.debug.tpi.s.log 1
+
+

@@ -20,13 +20,17 @@ void Widget::on_pushButton_clicked()
 //    QProcess::execute("pwd"); // 阻塞方式
 //    system("ls");
     QProcess *proc = new QProcess;
-    proc->start("ls");
+    proc->start("sudo sh open.sh");
+    proc->start("pwd");
+//    proc->start("pwd");
     if(!proc->waitForFinished()){
         proc->close();
-        ui->textEdit->setText("创建进程失败");
+        ui->textEdit->setText("open创建进程失败");
     }
+    QString strResult = proc->readAllStandardOutput();
+    proc->terminate();
     proc->close();
-    ui->textEdit->setText("tomcat开启");
+    ui->textEdit->setText(strResult);
     delete proc;
 }
 
@@ -35,12 +39,16 @@ void Widget::on_pushButton_2_clicked()
     //    QProcess::execute("pwd"); // 阻塞方式
     //    system("ls");
         QProcess *proc = new QProcess;
-        proc->start("ls");
+        proc->start("sudo sh close.sh");
+        proc->start("pwd");
+    //    proc->start("pwd");
         if(!proc->waitForFinished()){
             proc->close();
-            ui->textEdit->setText("创建进程失败");
+            ui->textEdit->setText("close创建进程失败");
         }
+        QString strResult = proc->readAllStandardOutput();
+        proc->terminate();
         proc->close();
-        ui->textEdit->setText("tomcat关闭");
+        ui->textEdit->setText(strResult);
         delete proc;
 }
