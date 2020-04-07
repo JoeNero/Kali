@@ -25,7 +25,7 @@ gg  /   ctrl+g 　文件末尾
 ifconfig
 ip地址
 
-![image-20200328153351613](/home/xtt/.config/Typora/typora-user-images/image-20200328153351613.png)
+
 
 
 
@@ -49,3 +49,7 @@ ps -eo pid,tty,user,comm,lstart,etime | grep redis
 ctrl + k ctrl + 0 折叠所有的代码
 
 ctrl + k  ctrl +j 展开所有的代码
+
+wine 依赖项目的问题
+
+sudo dpkg -i --force-overwrite /var/cache/apt/archives/*.deb
